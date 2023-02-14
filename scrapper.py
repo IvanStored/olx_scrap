@@ -50,7 +50,7 @@ async def get_phone_data(session, page):
 
 async def gather_data():
 
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(trust_env=True) as session:
 
         tasks = []
 
