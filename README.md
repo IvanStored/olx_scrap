@@ -1,5 +1,6 @@
 # OLX parsing
-starodead.pythonanywhere.com
+
+https://starodead.pythonanywhere.com
 
 login: test@gmail.com
 
