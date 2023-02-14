@@ -1,5 +1,11 @@
 # OLX parsing
+starodead.pythonanywhere.com
 
+login: test@gmail.com
+
+pass: 1qazcde3
+## Bugs
+- Я не знаю почему, но обьявления не отображаются в Google Chrome
 ## Features
 
 - Пользователь может авторизироваться по логину и паролю.
