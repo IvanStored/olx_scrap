@@ -1,0 +1,63 @@
+<div class="row row-cols-1 row-cols-md-3 g-4 phones">
+  {% for phone in phones %}
+  <div class="col" id="{{ phone["id"] }}">
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title">{{ phone["phone"] }}</h5>
+      <p class="card-text">
+        {{ phone["price"] }}
+      </p>
+      <button class="imagelink btn btn-primary" data-id="{{ phone["link"] }}" data-title="{{ phone["phone"] }}">View photo</button>
+      <button class="btn btn-danger" onclick="
+      $('#{{ phone["id"] }}').remove();
+      $('#counter').text($('.card-body').length);
+      ">Delete</button>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">{{ phone["date"] }}</small>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+<script type='text/javascript'>
+  $(document).ready(function(){
+      $('.imagelink').click(function(){
+          let link = $(this).data('id');
+          let title = $(this).data('title');
+          let image = document.getElementById("phone_image");
+          let olx = document.getElementById("olx");
+
+          $.ajax({
+              url: '{{ url_for("main.get_image") }}',
+              type: 'post',
+              data: {link: link},
+              success: function(data){
+                  $(`.modal-title`).text(title);
+                  image.src = data.image;
+                  olx.href = link;
+                  $(`#exampleModal`).modal('show');
+              }
+          });
+      });
+  });
+</script>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" id="phone_image" style="
+          width: 100%;
+          "/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <a href="" class="btn btn-primary" id="olx">Go to OLX</a>
+      </div>
+    </div>
+  </div>
+</div>

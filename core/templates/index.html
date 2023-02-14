@@ -1,0 +1,34 @@
+{% extends "layout.html"%}
+{% block content %}
+<div class="text-center">
+  <h4>Привет, {{ current_user.username }}.
+    <a href="/logout" class="btn btn-danger">
+    Выйти <i class="fas fa-sign-out-alt"></i>
+    </a>
+  </h4>
+  <h1>Количество обьявлений: <span class="badge badge-primary" id="counter"></span></h1>
+  <button type="button" class="update-info btn btn-primary">Обновить</button>
+</div>
+<div class="advert">
+  {% include "response.html" %}
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+  $(document).ready(function(){
+      $('.update-info').click(function(){
+
+          $.ajax({
+              url: '{{ url_for("main.scrap") }}',
+
+              type: 'post',
+              success: function(data){
+                  $(`.advert`).html(data.htmlresponse);
+                  $('#counter').text($('.card-body').length);
+
+              }
+          });
+      });
+  });
+
+</script>
+{% endblock %}
