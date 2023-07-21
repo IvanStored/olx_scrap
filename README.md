@@ -29,7 +29,7 @@ pass: 1qazcde3
 
 ```sh
 git clone https://github.com/IvanStored/olx_scrap
-cd fake-csv-generator
+cd olx_scrap
 python -m venv venv
 venv/scripts/activate
 pip install -r requirements.txt
